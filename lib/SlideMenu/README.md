@@ -4,7 +4,7 @@
 和微信的菜单对比，原文中有一点没有实现：
 * 菜单与其他列表没有联动，如其他列表点击后，菜单没有收回，原因是作者提供的是侧滑菜单组件，而不是将整个列表做为一个组件提供。
 
-先看一下最终实现的效果：
+先看一下最终实现的效果：  
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190923175830222.gif)
 
 ### 一、明确需求
@@ -129,7 +129,8 @@ WidgetsBinding.instance.addPostFrameCallback((duration) {
 });
 ```
 
-* 还有一个是子节点的`onPointerUp`事件会在父节点的`onPointerDown`事件后触发，这样如果点击在菜单左侧区域，如下图：
+* 还有一个是子节点的`onPointerUp`事件会在父节点的`onPointerDown`事件后触发，这样如果点击在菜单左侧区域，如下图：  
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190923174618869.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B1cl9l,size_16,color_FFFFFF,t_70)
 则会先触发父节点的`onPointerDown`事件，将菜单隐藏，再触发子节点的`onPointerUp`事件，想将菜单展示，发生冲突，所以需要加一个判断，父节点动画未结束时，子结点事件不处理，即保留点击上图红色区域内则菜单隐藏的逻辑。
 ```js
